@@ -22,8 +22,8 @@ const helmet = require('helmet');
 container.resolve(function(users, _, admin, home, group, results, privatechat, profile){
     mongoose.Promise = global.Promise;
     //mongoose.connect('mongodb://localhost/whiteboard');
-    mongoose.connect("mongodb+srv://test:adarsh123abc@whiteboard-btzns.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true });
-    //mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
+    //mongoose.connect("mongodb+srv://test:adarsh123abc@whiteboard-btzns.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true });
+    mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
     const app= SetupExpress();
 
     function SetupExpress(){

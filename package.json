@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A virtual chat application built with node, mongodb, express and socket.io",
   "main": "./views/index.ejs",
-  "engine":{
+  "engines":{
     "node": "10.15.3",
     "npm": "6.4.1"
   },

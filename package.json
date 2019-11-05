@@ -1,0 +1,54 @@
+{
+  "name": "whiteboard",
+  "version": "1.0.0",
+  "description": "A virtual chat application built with node, mongodb, express and socket.io",
+  "main": "./views/index.ejs",
+  "engine":{
+    "node": "10.15.3",
+    "npm": "6.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdarshK062/whiteboard.git"
+  },
+  "author": "Adarsh AK",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdarshK062/whiteboard/issues"
+  },
+  "homepage": "https://github.com/AdarshK062/whiteboard#readme",
+  "dependencies": {
+    "async": "^3.1.0",
+    "aws-sdk": "^2.546.0",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.0.0",
+    "cookie-parser": "^1.4.4",
+    "dependable": "^1.1.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-promise-router": "^3.0.3",
+    "express-session": "^1.16.2",
+    "express-validator": "^5.1.2",
+    "formidable": "^1.2.1",
+    "googleapis": "^39.2.0",
+    "helmet": "^3.21.1",
+    "lodash": "^4.17.15",
+    "mongoose": "^5.7.3",
+    "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
+    "nodemon": "^1.19.3",
+    "passport": "^0.4.0",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth": "^2.0.0",
+    "passport-local": "^1.0.0",
+    "socket.io": "^2.3.0"
+  }
+}

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title %></title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/uploads/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/profile.css">
+
+
+</head>
+
+<body>
+<%- include ../partials/navbar.ejs %>
+
+    <div class="col-md-12 mob-clearfix margin-80">
+        <input type="hidden" id="name-user" value="<%= user.username %>">
+        <input type="hidden" id="name-image" value="<%= user.userImage %>">
+
+        <div class="col-md-12">
+            <div class="chat_container">
+                <div class="row">
+                    <!-- LEFT -->
+
+                    <div class="col-sm-4 col-md-3">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="profile-sidebar">
+                                        <div class="img-container">
+                                            <img src="/uploads/<%= data.userImage %>" class="img-responsive img-user" id="show_img">
+                                        </div>
+                                
+                                    <div class="profile-usertitle">
+                                        <div class="profile-usertitle-name">
+                                            <%= data.fullname %>
+                                        </div>
+                                        <div class="profile-usertitle-job">
+                                            <%= data.username %>
+                                        </div>
+                                    </div>
+                              
+                                    <div class="profile-usermenu">
+                                        <ul class="nav">
+                                            <li class="active">
+                                                <a href="/profile/<%= data.username %>" style="color:#343a40 !important">
+                                                    <i class="fa fa-home" style="color:#343a40 !important"></i>
+                                                    Overview
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                   
+                    <!--MIDDLE-->
+                    <div class="col-sm-5 col-md-6 mob-50">
+
+                        <div class="profile-signup">
+                            <span id="error" class="text-center"></span>
+                            <form class="form" role="form" method="POST" id="form" action="#">
+
+                                <h3 style="margin-top:0px; color:#343a40 !important">Personal Information</h3>
+                                <hr />
+                                <div class="row">
+                                        <div class="col-md-12">
+                                                <label style="color:#343a40 !important">Username : </label>
+                                                <label style="color:#343a40 !important; margin-right:15px;"></label>
+                                            <label id="username" class="form-control input-lg"><%= data.username %></label>
+                                        </div>
+                                    <div class="col-md-12">
+                                            <label style="color:#343a40 !important">FullName : </label>
+                                            <label style="color:#343a40 !important; margin-right:15px;"></label>
+                                        <label id="fullname" class="form-control input-lg"><%= data.fullname %></label>
+                                    </div>
+                                    <div class="col-md-12">
+                                            <label style="color:#343a40 !important">Section : </label>
+                                            <label style="color:#343a40 !important; margin-right:15px;"></label>
+                                        <label id="section" class="form-control input-lg"><%= data.section %></label>
+                                    </div>
+                                </div>
+                                <label style="color:#343a40 !important">Gender : </label>
+                                <label style="color:#343a40 !important; margin-right:15px;"></label>
+                                <label id="section" class="form-control input-lg">
+                                <% if(typeof data.gender !== 'undefined') { %>
+                                        <%= data.gender %>
+                                <% } %>
+                                </label>
+                                <div class="" style="margin-top:20px">
+                                <label style="color:#343a40 !important">Bio :</label>
+                                <label style="color:#343a40 !important; margin-right:15px;"></label>
+                                    <label name="bio" id="bio" class="form-control input-lg" rows="5" placeholder="A one liner sentence"><%= data.bio %></label>
+                                </div>
+                            
+                            </form>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> 
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/messagelink.js"></script>
+<script src="/js/group/sendrequest.js"></script> 
+<script src="/js/global.js"></script>
+<script src="/js/deparam.js"></script>
+
+</html>

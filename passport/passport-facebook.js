@@ -18,8 +18,11 @@ passport.deserializeUser((id, done) => {
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOKCLIENTID,
     clientSecret: process.env.FACEBOOKCLIENTSECRET,
+    //clientID: secret.facebook.clientID,
+    //clientSecret: secret.facebook.clientSecret,
     profileFields: ['email','displayName', 'photos'],
-    callbackURL: 'http://localhost:3000/auth/facebook/callback',
+    //callbackURL: 'http://localhost:3000/auth/facebook/callback',
+    callbackURL: 'http://whiteboard062.herokuapp.com/auth/facebook/callback',
     passReqToCallback: true
 
 }, (req, token, refreshToken, profile, done) => {

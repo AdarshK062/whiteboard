@@ -81,6 +81,7 @@ container.resolve(function(users, _, admin, home, group, results, privatechat, p
         app.use(validator());
         app.use(session({
             secret: process.env.SECRET_KEY,
+            //secret:'thisissecret',
             resave: true,
             saveUninitialized: true,
             store: new MongoStore({mongooseConnection: mongoose.connection})

@@ -16,9 +16,12 @@ passport.deserializeUser((id, done) => {
 });
 
 passport.use(new GoogleStrategy({
+    //clientID: secret.google.clientID,
+    //clientSecret: secret.google.clientSecret,
     clientID: process.env.GOOGLECLIENTID,
     clientSecret: process.env.GOOGLECLIENTSECRET,
-   callbackURL: 'http://localhost:3000/auth/google/callback',
+    //callbackURL: 'http://localhost:3000/auth/google/callback',
+    callbackURL: 'http://whiteboard062.herokuapp.com/auth/google/callback',
     passReqToCallback: true
 
 }, (req, accessToken, refreshToken, profile, done) => {

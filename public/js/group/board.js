@@ -66,7 +66,15 @@ $(document).ready(function(){
         });
     
         var prev = {};
-        
+        canvas.on('touchstart',function(e){
+            e.preventDefault();
+            drawing = true;
+            prev.x = e.pageX;
+            prev.y = e.pageY;
+            
+            // Hide the instructions
+            instructions.fadeOut();
+        });
         canvas.on('mousedown',function(e){
             e.preventDefault();
             drawing = true;
@@ -76,13 +84,28 @@ $(document).ready(function(){
             // Hide the instructions
             instructions.fadeOut();
         });
-        
+        doc.bind('touchend touchleave',function(){
+            drawing = false;
+        });
         doc.bind('mouseup mouseleave',function(){
             drawing = false;
         });
     
         var lastEmit = $.now();
     
+        doc.on('touchmove',function(e){
+            if($.now() - lastEmit > 30){
+                socket.emit('mousemove',{
+                    'x': e.pageX-12,
+                    'y': e.pageY-211,
+                    'drawing': drawing,
+                    'id': id,
+                    'color': colorPicked,
+                    'lineThickness': lineWidthPicked
+                });
+                lastEmit = $.now();
+            }
+        });
         doc.on('mousemove',function(e){
             if($.now() - lastEmit > 30){
                 socket.emit('mousemove',{

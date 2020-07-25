@@ -20,13 +20,14 @@ container.resolve(function(users, _, admin, home, group, results, privatechat, p
     mongoose.Promise = global.Promise;
     //mongoose.connect('mongodb://localhost/whiteboard');
     mongoose.connect("mongodb+srv://test:adarsh123abc@whiteboard-btzns.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true });
+    // mongoose.connect("mongodb://test:adarsh123abc@main-shard-00-00-03xkr.mongodb.net:27017,main-shard-00-01-03xkr.mongodb.net:27017,main-shard-00-02-03xkr.mongodb.net:27017/main?ssl=true&replicaSet=Main-shard-0&authSource=admin&retryWrites=true", { useNewUrlParser: true });
     const app= SetupExpress();
 
     function SetupExpress(){
         const app = express();
         const server = http.createServer(app);
         const io = socketIO(server);
-        server.listen(7090, function(){
+        server.listen(process.env.PORT || 7090, function(){
             console.log('Listening on port 7090');
         });
         ConfigureExpress(app);

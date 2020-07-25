@@ -4,36 +4,38 @@ module.exports = function(async, Users, Message, FriendResult){
             router.get('/chat/:name', this.getchatPage);
             router.post('/chat/:name', this.chatPostPage);
         },
+
         getchatPage: function(req, res){
             async.parallel([
+
                 function(callback){
                     Users.findOne({'username': req.user.username})
-                    .populate('request.userId')
-                    .exec((err, result) => {
-                        callback(err, result);
-                    })
-
+                        .populate('request.userId')
+                        .exec((err, result) => {
+                            callback(err, result);
+                        })
                 },
 
                 function(callback){
-                    const nameRegex = new RegExp("^"+req.user.username.toLowerCase().replace(/-/g,' '), "i");
+                    const nameRegex = new RegExp("^"+req.user.username.toLowerCase().replace(/`7`/g,' '), "i");
                     Message.aggregate([
                         {$match:{$or:[{'senderName': nameRegex}, {'receiverName': nameRegex}]}},
                         {$sort:{'createdAt': -1}},
                         {$group: {"_id": {
-                                "last_message_between":{
-                                    $cond:[
-                                        {
-                                            $gt:[
-                                                {$substr:["$senderName", 0, 1]},
-                                                {$substr:["$receiverName", 0, 1]}]
-                                        },
-                                        {$concat:["$senderName"," and ","$receiverName"]},
-                                        {$concat:["$receiverName"," and ","$senderName"]}
-                                    ]
-                                }
-                            },"body":{$first:"$$ROOT"}
-                        }
+                                    "last_message_between":{
+                                        $cond:[
+                                            {
+                                                $gt:[
+                                                    {$substr:["$senderName", 0, 1]},
+                                                    {$substr:["$receiverName", 0, 1]}]
+                                            },
+                                            {$concat:["$senderName"," and ","$receiverName"]},
+                                            {$concat:["$receiverName"," and ","$senderName"]}
+                                        ]
+                                    }
+                                },
+                                "body":{$first:"$$ROOT"}
+                            }
                         }
                     ]).exec(function(err, newResult){
                         const arr = [
@@ -42,16 +44,16 @@ module.exports = function(async, Users, Message, FriendResult){
                         ];
                         
                         Message.populate(newResult, arr, (err, newResult1) => {
-                            //console.log(newResult1);
                             callback(err, newResult1);
-                        });                    })
+                        });                    
+                    })
                 },
+
                 function(callback){
                     Message.find({'$or': [{'senderName': req.user.username}, {'receiverName': req.user.username}]})
                         .populate('sender')
                         .populate('receiver')
                         .exec((err, result3) => {
-                           // console.log(result3);
                             callback(err, result3);
                         })
                 }
@@ -60,19 +62,18 @@ module.exports = function(async, Users, Message, FriendResult){
                 const result1 = results[0];
                 const result2 = results[1];
                 const result3 = results[2];
-                //console.log(result3);
                 const params = req.params.name.split('&');
                 const nameParams = params[0];
                 res.render('private/privatechat', {title: 'WhiteBoard - Private', user:req.user, data: result1, chat: result2, chats: result3, name:nameParams});
                });
         },
         chatPostPage: function(req, res, next){
-           // console.log(req.params);
             const params = req.params.name.split('&');
             const nameParams = params[0];
-            const nameRegex = new RegExp("^"+nameParams.toLowerCase().replace(/-/g,' '), "i");
+            const nameRegex = new RegExp("^"+nameParams.toLowerCase().replace(/`7`/g,' '), "i");
 
             async.waterfall([
+
                 function(callback){
                     if(req.body.message){
                         Users.findOne({'username': {$regex: nameRegex}}, (err, data) => {
@@ -82,7 +83,6 @@ module.exports = function(async, Users, Message, FriendResult){
                 },
 
                 function(data, callback){
-                    //console.log(data);
                     if(req.body.message){
                         const newMessage = new Message();
                         newMessage.sender = req.user._id;
@@ -96,11 +96,11 @@ module.exports = function(async, Users, Message, FriendResult){
                             if(err){
                                 return next(err);
                             }
-                            //console.log(result);
                             callback(err, result);
                         })
                     }
                 }
+                
             ], (err, results) => {
                 res.redirect('/chat/'+req.params.name);
             });

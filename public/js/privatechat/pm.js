@@ -4,24 +4,21 @@ $(document).ready(function(_){
     var newparam = paramOne.split('&');
     var username = newparam[0];
     $('#receiver_name').text('    '+username[0].toUpperCase()+username.slice(1));
-
     swap(newparam, 0, 1);
     var paramTwo = newparam[0]+'&'+newparam[1];
+
     socket.on('connect', function(){
         var params = {
             room1: paramOne,
             room2: paramTwo
         }
         socket.emit('join PM', params);
-
-        
-
-    socket.on('message display', function(){
-        $('#reload').load(location.href + ' #reload');
+        socket.on('message display', function(){
+            $('#reload').load(location.href + ' #reload');
+        });
     });
-});
-    socket.on('new message', function(data){
 
+    socket.on('new message', function(data){
         var template=$('#message-template').html();
         var message=Mustache.render(template, {
             text: data.text,
@@ -34,7 +31,6 @@ $(document).ready(function(_){
         e.preventDefault();
         var msg=$('#msg').val();
         var sender= $('#name-user').val();
-
         if(msg.trim().length > 0){
             socket.emit('private message', {
                 text: msg,
@@ -48,7 +44,6 @@ $(document).ready(function(_){
 
     $('#send-message').on('click', function(){
         var message = $('#msg').val();
-
         $.ajax({
             url: '/chat/'+paramOne,
             type:'POST',
@@ -60,7 +55,6 @@ $(document).ready(function(_){
             }
         })
     });
-
 });
 
 function swap(input, value_1, value_2){

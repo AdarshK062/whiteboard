@@ -4,8 +4,6 @@ var groupMessage = mongoose.Schema({
     body: {type: String},
     name: {type: String},
     sender: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    //senderName: {type: String},
-    //userImage: {type: String, default: 'default.png'},
     createdAt: {type: Date, default: Date.now}
 });
 module.exports= mongoose.model('GroupMessage', groupMessage);

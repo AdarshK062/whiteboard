@@ -3,15 +3,13 @@ body {
     line-height: 1.42857143;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #555;
-    background: #a4c4f5;
+    background: #84ceeb;
 }
-
 
 h1 {
     font-size: 38px;
     color: #5C5C5B;
 }
-
 
 h2 {
     font-size: 32px;
@@ -25,7 +23,7 @@ h3 {
 }
 
 .navbar{
-    background: #343a40;
+    background: #1f2833;
 }
 
 .navbar-default .navbar-brand {
@@ -38,31 +36,61 @@ h3 {
 
 .navbar-brand:hover{
     color: #fff !important;
-    background-color: #343a40;
+    background-color: #1f2833;
 }
 
 .navbar-default .navbar-nav > li > a {
     color: #fff !important;
-    background-color: #343a40;
+    background-color: #1f2833;
     font-size: 16px;
     font-weight: bold;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
     color: #fff !important;
-    background-color: #343a40;
+    background-color: #1f2833;
 }
 
 .dropdown-toggle:active, .open .dropdown-toggle {
-    background:#343a40 !important; 
+    background:#1f2833 !important; 
     border: none !important;
     color:#000 !important;
 }
+
+a {
+    text-decoration: none;
+}
+
 .btn-sm{
     color:#fff;
-    background-color:#343a40;
-    border-color:#343a40;
+    background-color:#1f2833;
+    border-color:#1f2833;
 }
+
+.btn-lg {
+    color:#fff;
+    background-color:#1f2833;
+    border-color:#1f2833;
+}
+
+.btn-lg :active{
+    color:#fff;
+    background-color:#1f2833;
+    border-color:#1f2833;
+}
+
+.btn-lg:hover{
+    color:#fff;
+    background-color:#1f2833;
+    border-color:#1f2833;
+}
+
+.btn-lg :visited{
+    color:#fff;
+    background-color:#1f2833;
+    border-color:#1f2833;
+}
+
 .margin-80{
     margin-bottom:80px
 }
@@ -72,7 +100,7 @@ h3 {
     border: medium none;
     outline: 0;
     font-size: 17px;
-    color: #fdfdfd;
+    color: #fffcf7;
 }
 
 .new_message_head button:focus {
@@ -80,7 +108,7 @@ h3 {
 }
 
 .new_message_head {
-    background: #343a40 none repeat scroll 0 0;
+    background: #1f2833 none repeat scroll 0 0;
     float: left;
     font-size: 13px;
     font-weight: 600;
@@ -94,7 +122,7 @@ h3 {
 }
 
 .chat_area {
-    background: white;
+    background: #fffcf7;
     float: left;
     height: 360px;
     overflow-x: hidden;
@@ -108,25 +136,24 @@ h3 {
     -ms-word-break: break-all;
     word-break: break-all;
     word-break: break-word;
-
     -ms-hyphens: auto;
     -moz-hyphens: auto;
     -webkit-hyphens: auto;
     hyphens: auto;
 }
 
-    .chat_area li {
-        padding: 14px 14px 0;
-    }
+.chat_area li {
+    padding: 14px 14px 0;
+}
 
-        .chat_area li .chat-img1 img {
-            height: 40px;
-            width: 40px;
-        }
+.chat_area li .chat-img1 img {
+    height: 40px;
+    width: 40px;
+}
 
-    .chat_area .chat-body1 {
-        margin-left: 50px;
-    }
+.chat_area .chat-body1 {
+    margin-left: 50px;
+}
 
 .chat_area li:last-child {
     padding-bottom: 10px;
@@ -135,20 +162,20 @@ h3 {
 .chat-name{
     font-size: 17px;
     font-weight: 600;
-    color: #343a40;
+    color: #1f2833;
 }
 
 .message_write {
-    background: white none repeat scroll 0 0;
+    background: #fffcf7 none repeat scroll 0 0;
     float: left;
     padding: 15px;
     width: 100%;
 }
 
-    .message_write textarea.form-control {
-        height: 70px;
-        padding: 10px;
-    }
+.message_write textarea.form-control {
+    height: 70px;
+    padding: 10px;
+}
 
 .chat_bottom {
     float: left;
@@ -167,12 +194,12 @@ member_list li:hover {
     color: gray;
 }
 
-
 .btn:hover,
 .btn:focus,
 .btn:active {
     outline: 0 !important;
 }
+
 .card-container {
     -webkit-perspective: 800px;
     -moz-perspective: 800px;
@@ -181,9 +208,8 @@ member_list li:hover {
     margin-bottom: 30px;
 }
 
-
 .card {
-    background: none repeat scroll 0 0 #FFFFFF;
+    background: none repeat scroll 0 0 #fffcf7;
     border-radius: 4px;
     color: #444444;
 }
@@ -202,9 +228,9 @@ member_list li:hover {
     border-radius: 4px 4px 0 0;
 }
 
-    .card .cover img {
-        width: 100%;
-    }
+.card .cover img {
+    width: 100%;
+}
 
 .card .user {
     border-radius: 50%;
@@ -221,11 +247,11 @@ member_list li:hover {
     padding: 10px 20px 20px;
 }
 
-    .card .main {
-        min-height: 160px;
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
+.card .main {
+    min-height: 160px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
 
 .card .back .content .main {
     height: 215px;
@@ -257,15 +283,12 @@ member_list li:hover {
 }
 
 .card .footer {
-    border-top: 1px solid #a4c4f5;
+    border-top: 1px solid #84ceeb;
     color: #999999;
     margin: 30px 0 0;
     padding: 10px 0 0;
     text-align: center;
 }
-
-
-
 
 .main-scroll {
     height: 300px;
@@ -281,10 +304,11 @@ member_list li:hover {
 }
 
 .name, .friends, #numOfFriends{
-    color: #343a40 !important;
+    color: #1f2833 !important;
 }
+
 .club_name{
-    background-color: #343a40 !important;
+    background-color: #1f2833 !important;
     color: white;
 }
 
@@ -295,7 +319,7 @@ member_list li:hover {
 
 .gr-rightsidebar {
     padding-top: 15px;
-    background: white;
+    background: #fffcf7;
     float: left;
     height: 506px;
     overflow-x: hidden;
@@ -317,12 +341,12 @@ member_list li:hover {
 }
 
 .modal-title{
-    color: #343a40;
+    color: #1f2833;
 }
 
 #nameLink, .btn_close{
-    background-color: #343a40 !important;
-    color: white !important;
+    background-color: #1f2833 !important;
+    color: #fffcf7 !important;
 }
 
 .modal-body{
@@ -330,7 +354,7 @@ member_list li:hover {
 }
 
 .modal-content {
-    background-color: #fefefe;
+    background-color: #fffcf7;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
@@ -344,7 +368,7 @@ member_list li:hover {
 #val{
     cursor: pointer;
     text-decoration: none;
-    color: #343a40;
+    color: #1f2833;
 }
 
 .nav-label-icon {
@@ -397,7 +421,7 @@ member_list li:hover {
 }
 
 .drop-accept {
-    background: #343a40 !important;
+    background: #1f2833 !important;
     border: #3bb5ec;
     color: white !important;
     text-shadow: none;
@@ -489,7 +513,7 @@ member_list li:hover {
 }
 
 .drop-accept {
-    background: #343a40 !important;
+    background: #1f2833 !important;
     border: #3bb5ec;
     color: white !important;
     text-shadow: none;
@@ -498,6 +522,7 @@ member_list li:hover {
 #reload{
     padding: 0px 15px 0px 15px;
 }
+
 .img-circles{
     border-radius:50%;
     height:50px;

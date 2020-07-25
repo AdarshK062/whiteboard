@@ -2,9 +2,9 @@ $(document).ready(function(){
     var socket = io();
     var paramOne = $.deparam(window.location.pathname);
     var newparam = paramOne.split('&');
-
     swap(newparam, 0, 1);
     var paramTwo = newparam[0]+'&'+newparam[1];
+
     socket.on('connect', function(){
         var params = {
             room1: paramOne,
@@ -16,6 +16,7 @@ $(document).ready(function(){
             $('#reload').load(location.href + ' #reload');
         });
     });
+    
     $(document).on('click', '#messageLink', function(){
         var chatId = $(this).data().value;
 

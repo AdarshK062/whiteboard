@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
-
-const clubNames = mongoose.Schema({
+const companyNames = mongoose.Schema({
     name: {type: String, default: ''},
     country: {type: String, default: ''},
+    city:{type: String, default:''},
     image: {type: String, default: 'default.png'}
 });
-
-module.exports = mongoose.model('Club', clubNames);
+module.exports = mongoose.model('Company', companyNames);

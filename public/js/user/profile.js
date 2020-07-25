@@ -31,17 +31,16 @@ $(document).ready(function(){
         var bio = $('#bio').val();
         var userImage = $('#add-input').val();
         var image = $('#user-image').val();
-
-
         var isValid = true;
-
         if(userImage == ''){
             $('#add-input').val(image);
         }
+
         if(username == '' || fullname == '' || section == '' || gender == '' || bio == '') {
             isValid = false;
             $('#error').html('<div class ="alert alert-danger">You can\'t submit an empty field</div>');
-        } else {
+        } 
+        else {
             userImage = $('#add-input').val();
             $('#error').html('');
         }
@@ -64,7 +63,8 @@ $(document).ready(function(){
                     },200);
                 }
             })
-        } else {
+        } 
+        else {
             return false;
         }
     });

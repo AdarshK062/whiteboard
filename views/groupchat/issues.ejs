@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>WhiteBoard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/group.css"/>
+</head>
+
+<body>
+    <%- include ../partials/navbar.ejs %>
+    <% var fl=0 %>
+    <div class="col-md-12 mob-clearfix margin-80">
+        <input type="hidden" id="name-user" value="<%= user.username %>">
+        <input type="hidden" id="issueName" value="<%= issuename%>">   
+        <input type="hidden" id="name-image" value="<%= user.userImage %>">  
+        <div class="col-sm-4 col-md-3 mob-clearfix">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="card-container">
+                        <div class="card">
+                            <div id="userprofile">
+                                <div class="front">
+                                    <div class="content">
+                                        <div class="main">
+                                            <h3 class="name">Other Issues in the group</h3>
+                                            <div class="footer"></div>
+                                            <div id="mydiv4" class="chat_area" style="background-color: #fff;">
+                                                <ul class="list-unstyled">
+                                                    <% _.forEach(otherIssues, function(val) { %>
+                                                        <%st=val.issue.replace(/ /g,"`7`")%>
+                                                        <a href='/group/issues/<%=val.group%>*<%=val.issue.replace(/ /g,"`7`")%>'>
+                                                            <li class="left" >
+                                                                <span class="chat-img1 pull-left">
+                                                                    <img src="/uploads/<%= val.victimImage %>" class="img-circle" alt="">
+                                                                </span>
+                                                                <div class="chat-body1" >
+                                                                    <span class="chat-name">
+                                                                        <%= val.victimName %>
+                                                                    </span>
+                                                                    <br>
+                                                                    <%= val.issue %>
+                                                                </div>
+                                                            </li>
+                                                            <br>
+                                                        </a>
+                                                    <% }) %>
+                                                </ul>
+                                            </div>  
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5 col-md-6 message_section">  
+            <div class="row">
+                <div class="new_message_head">
+                    <div class="pull-left">
+                        <button class="company_name">
+                            <%= groupName %> Solutions
+                        </button>
+                    </div>
+                </div>
+                <br>
+                <div style="background-color: white;border-bottom: 1px solid white;">
+                    <button type="hidden"style="background-color: Transparent;border: none;outline:none;"></button>
+                        <div class="issue-body1">
+                            &nbsp;&nbsp;&nbsp;<img src="/uploads/<%=issueData.victimImage %>" class="img-circle" height="40px" width="40px" alt="">
+                            <span class="issue-name">
+                                <b> &nbsp; <%= issueData.victimName %></b>
+                            </span><br><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp; <%= issueData.issue %>
+                        </div>
+                        <hr style="margin-top:15px; margin-left:20px; margin-right: 20px;" />
+                        <h4><b>&nbsp;&nbsp;&nbsp;<u>Solutions:</u></b></h4>
+                </div>
+                <div id="mydiv3" class="chat_area">
+                    <ul id ="issues" class="list-unstyled">
+                        <% _.forEach(solution, function(val) { %>
+                            <% fl=fl+1 %>
+                            <li class="left">
+                                <span class="chat-img1 pull-left">
+                                    <img src="/uploads/<%=val.solverImage %>" class="img-circle" alt="">
+                                </span>
+                                <div class="chat-body1">
+                                    <span class="chat-name">
+                                        <%= val.solverName %>
+                                    </span>
+                                    <br>
+                                    <%= val.solution %>
+                                </div>
+                            </li>
+                            <hr style="margin-top:10px; margin-left:10px; margin-right: 10px; margin-bottom: 10px;" />
+                        <% }) %>
+                    </ul>
+                    <script id="issue-template" type="text/template">
+                        <li class="left">
+                            <span class="chat-img1 pull-left">
+                                <img src="/uploads/{{userImage}}" class="img-circle" alt="">
+                            </span>
+                            <div class="chat-body1">
+                                <span class="chat-name">
+                                    {{sender}}
+                                </span>
+                                <br>
+                                {{text}}
+                            </div>
+                        </li>
+                        <hr style="margin-top:10px; margin-left:10px; margin-right: 10px; margin-bottom: 10px;" />
+                    </script>
+                    <% if(fl==0){ %>
+                        <div class="left">
+                            <span class="chat-img1 pull-left"></span>
+                            <div class="chat-body1" style="text-align: center;">
+                                <span class="chat-name"><br><br><br>
+                                    No Solutions Yet!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>Start Writing Solutions for this....&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </span>
+                            </div>
+                        </div>
+                    <%}%>
+                </div>
+                <div class="message_write">
+                    <form action="#" id="issue-form" method="post">
+                        <textarea class="form-control" name="issue" id="iss" placeholder="Type solution"></textarea>
+                        <div class="clearfix"></div>
+                        <div class="chat_bottom">
+                            <button id="send-issue" class="pull-right btn btn-primary" style="background: #1f2833; border: #1f2833;border-radius: 50%; ">
+                                    <span class="glyphicon fa fa-paper-plane nav-glyphicon" style="color: rgb(255, 255, 255);"></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 col-md-3 mob-clearfix">
+            <div class="row" style="text-align: center;"> 
+                <button  class="btn btn-warning btn-lg">
+                    <i class="fa fa-mail-forward"></i> 
+                    <a href="/group/<%=groupName%>" style="text-decoration: none; color: white;">&nbsp;back</a>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>  
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/messagelink.js"></script>
+    <script src="/js/group/sendrequest.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
+    <script src="/js/group/issues.js"></script>
+    <script src="/js/global.js"></script>
+    <script src="/js/user/profile.js"></script>
+    <script src="/js/deparam.js"></script>
+</body>
+</html>

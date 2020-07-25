@@ -2,11 +2,13 @@ class Global {
     constructor(){
         this.globalRoom=[];
     }
+
     EnterRoom(id, name, room, img){
         var roomName = {id, name, room, img};
         this.globalRoom.push(roomName);
         return roomName;
     }
+
     RemoveUser(id){
         var user = this.GetUser(id);
         if(user){
@@ -21,6 +23,7 @@ class Global {
         })[0];
         return getUser;
     }
+    
     GetRoomList(room){
         var roomName = this.globalRoom.filter((user) => user.room === room);
         var namesArray = roomName.map((user) => {

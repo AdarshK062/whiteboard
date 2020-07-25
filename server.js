@@ -10,38 +10,33 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 const passport = require('passport');
-
 const socketIO = require('socket.io');
 const {Users} = require('./helpers/UsersClass');
 const {Global} = require('./helpers/Global');
 const compression = require('compression');
 const helmet = require('helmet');
 
-
-
-container.resolve(function(users, _, admin, home, group, results, privatechat, profile){
+container.resolve(function(users, _, admin, home, group, results, privatechat, profile, issues){
     mongoose.Promise = global.Promise;
-    //mongoose.connect('mongodb://localhost/whiteboard');
+    mongoose.connect('mongodb://localhost/whiteboard');
     //mongoose.connect("mongodb+srv://test:adarsh123abc@whiteboard-btzns.mongodb.net/test?retryWrites=true&w=majority", { useNewUrlParser: true });
-    mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
     const app= SetupExpress();
 
     function SetupExpress(){
         const app = express();
         const server = http.createServer(app);
         const io = socketIO(server);
-        server.listen(process.env.PORT || 3000, function(){
-            console.log('Listening on port 3000');
+        server.listen(7090, function(){
+            console.log('Listening on port 7090');
         });
         ConfigureExpress(app);
 
-        
         require('./socket/groupchat')(io, Users);
         require('./socket/friend')(io);
         require('./socket/globalroom')(io, Global, _);
         require('./socket/privatemessage')(io);
+        require('./socket/issues')(io);
         
-
         const router = require('express-promise-router')();
         users.SetRouting(router);
         admin.SetRouting(router);
@@ -50,49 +45,33 @@ container.resolve(function(users, _, admin, home, group, results, privatechat, p
         results.SetRouting(router);
         privatechat.SetRouting(router);
         profile.SetRouting(router);
+        issues.SetRouting(router);
 
         app.use(router);
-        
         app.use(function(req, res){
             res.render('404');
         });
-        
     }
     
-
     function ConfigureExpress(app){
-
-        
         app.use(compression());
         app.use(helmet());
-        
-
         require('./passport/passport-local');
-        require('./passport/passport-facebook');
-        require('./passport/passport-google');
-
-
         app.use(express.static('public'));
         app.use(cookieParser());
         app.set('view engine','ejs');
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({extended: true}));
-
         app.use(validator());
         app.use(session({
-            secret: process.env.SECRET_KEY,
-            //secret:'thisissecret',
+            secret:'thisissecret',
             resave: true,
             saveUninitialized: true,
             store: new MongoStore({mongooseConnection: mongoose.connection})
         }));
-
         app.use(flash());
-
         app.use(passport.initialize());
         app.use(passport.session());
-
         app.locals._ =_;
     }
-
 });

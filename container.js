@@ -1,22 +1,19 @@
 const dependable = require('dependable');
 const path = require('path');
-
 const container = dependable.container();
-
 const simpleDependencies = [
     ['_', 'lodash'],
     ['mongoose', 'mongoose'],
     ['passport','passport'],
     ['formidable', 'formidable'],
     ['async', 'async'], 
-    ['Club', './models/clubs'],
+    ['Issue', './models/issue'],
+    ['Company', './models/clubs'],
     ['Users', './models/user'],
     ['Message', './models/message'],
     ['Group', './models/groupmessage'],
-    ['aws', './helpers/AWSUpload']
+    ['Solution', './models/solutions'],
 ];
-
-
 
 simpleDependencies.forEach(function(val){
     container.register(val[0], function(){

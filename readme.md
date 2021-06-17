@@ -12,7 +12,7 @@
 <br>
 <h2> Demo</h2><br>
 Visit link for live demo:<br>
-<a href="www.whiteboard062.herokuapp.com">WhiteBoard Link</a>
+<a href="https://www.whiteboard062.herokuapp.com">WhiteBoard Link</a>
 <br>
 <h2> Working</h2>
 1. Create Account and Login.<br>
